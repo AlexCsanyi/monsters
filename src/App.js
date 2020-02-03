@@ -8,7 +8,8 @@ export default class App extends Component {
 
     this.state = {
       monsters: [],
-      isLoaded: false
+      isLoaded: false,
+      searchField: ""
     };
   }
 
@@ -32,7 +33,10 @@ export default class App extends Component {
   }
 
   render() {
-    const { error, isLoaded, monsters } = this.state;
+    const { error, isLoaded, monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter(monster =>
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+    );
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -40,7 +44,12 @@ export default class App extends Component {
     } else {
       return (
         <div className="App">
-          <CardList monsters={monsters}></CardList>
+          <input
+            type="search"
+            placeholder={"search monsters"}
+            onChange={e => this.setState({ searchField: e.target.value })}
+          ></input>
+          <CardList monsters={filteredMonsters}></CardList>
         </div>
       );
     }
