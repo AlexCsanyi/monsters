@@ -33,6 +33,10 @@ export default class App extends Component {
       );
   }
 
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value });
+  }
+
   render() {
     const { error, isLoaded, monsters, searchField } = this.state;
     const filteredMonsters = monsters.filter(monster =>
@@ -47,7 +51,7 @@ export default class App extends Component {
         <div className="App">
           <SearchBox
             placeholder="search monsters"
-            handleChange={e => this.setState({ searchField: e.target.value })}
+            handleChange={this.handleChange}
           ></SearchBox>
           <CardList monsters={filteredMonsters}></CardList>
         </div>
