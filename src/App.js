@@ -49,6 +49,7 @@ export default class App extends Component {
     } else {
       return (
         <div className="App">
+          <h1>Monsters Inc.</h1>
           <SearchBox
             placeholder="search monsters"
             handleChange={this.handleChange}
